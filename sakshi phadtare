@@ -1,0 +1,519 @@
+Microsoft Windows [Version 10.0.22621.2861]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Sakshi>cd "c:\Program Files\MySQL\MySQL Server 8.0\bin\
+
+c:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database bloodbank;
+Query OK, 1 row affected (0.13 sec)
+
+mysql> use bloodbank;
+Database changed
+mysql> create table bb_manager;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table bb_manager(m_id int,m_name varchar(100),m_phone int);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> select * from bb_manager;
+Empty set (0.03 sec)
+
+mysql> insert into table bb_manager values(101,"sakshi",9702773485);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table bb_manager values(101,"sakshi",9702773485)' at line 1
+mysql> insert into table bb_manager values(101,sakshi,9702773485);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table bb_manager values(101,sakshi,9702773485)' at line 1
+mysql> insert into table bb_manager values(101,'sakshi',9702773485);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table bb_manager values(101,'sakshi',9702773485)' at line 1
+mysql> insert into  bb_manager values(101,'sakshi',9702773485);
+ERROR 1264 (22003): Out of range value for column 'm_phone' at row 1
+mysql> insert into  bb_manager values(101,'sakshi',09875);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into  bb_manager values(102,'saujal',098345),
+    -> (103,'aman',012456),
+    -> (104,'shruti',011345),
+    -> (105,'pranali',022675),
+    -> (106,'deep',033904),
+    -> (107,'bhawana',044123),
+    -> (108,'pooja',0550927),
+    -> (109,'dipika',0660932),
+    -> (110,'harsh',0773210);
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select * from bb_manager;
++------+---------+---------+
+| m_id | m_name  | m_phone |
++------+---------+---------+
+|  101 | sakshi  |    9875 |
+|  102 | saujal  |   98345 |
+|  103 | aman    |   12456 |
+|  104 | shruti  |   11345 |
+|  105 | pranali |   22675 |
+|  106 | deep    |   33904 |
+|  107 | bhawana |   44123 |
+|  108 | pooja   |  550927 |
+|  109 | dipika  |  660932 |
+|  110 | harsh   |  773210 |
++------+---------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create table recording_staff(record_id int primary key,record_name varchar(100),record_phone bigint);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into recording_staff values(1011,'tanjiro',12345678),
+    -> (1012,'zentsu',121345678),
+    -> (1013,'mitsuri',131459872),
+    -> (1014,'kiyo',141567829),
+    -> (1015,'shiko',151826545),
+    -> (1016,'akaza',161825411),
+    -> (1017,'goku',171923511),
+    -> (1018,'tengen',181926368),
+    -> (1019,'kokushi',191029531),
+    -> (1020,'amano',189061423);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from recording_staff;
++-----------+-------------+--------------+
+| record_id | record_name | record_phone |
++-----------+-------------+--------------+
+|      1011 | tanjiro     |     12345678 |
+|      1012 | zentsu      |    121345678 |
+|      1013 | mitsuri     |    131459872 |
+|      1014 | kiyo        |    141567829 |
+|      1015 | shiko       |    151826545 |
+|      1016 | akaza       |    161825411 |
+|      1017 | goku        |    171923511 |
+|      1018 | tengen      |    181926368 |
+|      1019 | kokushi     |    191029531 |
+|      1020 | amano       |    189061423 |
++-----------+-------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> create table city(city_id int primary key,city_name varchar(20) not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into city values(1100,'pune'),
+    -> insert into city values(1200,'mumbai'),
+    -> (1300,'nashik'),
+    -> (1400,'satara'),
+    -> (1500,'sangli'),
+    -> (1600,'delhi'),
+    -> (1700,'kolhapur'),
+    -> (1800,'manali'),
+    -> (1900,'kashmir'),
+    -> (1900,'kashmir'),
+    -> (2000,'ladhak');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into city values(1200,'mumbai'),
+(1300,'nashik'),
+(1400,'satara'),
+(1500,' at line 2
+mysql> insert into city values(1200,'mumbai'),
+    -> (1200,'mumbai'),
+    -> (1200,'mumbai');
+ERROR 1062 (23000): Duplicate entry '1200' for key 'city.PRIMARY'
+mysql> insert into city values(1100,'pune'),
+    -> (1200,'mumbai'),
+    -> (1300,'nashik'),
+    -> (1400,'satara'),
+    -> (1500,'sangli'),
+    -> (1600,'delhi'),
+    -> (1700,'kolhapur'),
+    -> (1800,'manali'),
+    -> (1900,'kashmir'),
+    -> (2000,'ladhak');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from city;
++---------+-----------+
+| city_id | city_name |
++---------+-----------+
+|    1100 | pune      |
+|    1200 | mumbai    |
+|    1300 | nashik    |
+|    1400 | satara    |
+|    1500 | sangli    |
+|    1600 | delhi     |
+|    1700 | kolhapur  |
+|    1800 | manali    |
+|    1900 | kashmir   |
+|    2000 | ladhak    |
++---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> create table blood_donor(bd_id int not null,bd_name varchar(10),bd_age varchar(10),bd_sex varchar(10),bd_blood_group varchar(10),bd_reg_date date,rec
+ord_id int not null,city_id int not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into blood_donor values(11,'swati',35,'f','O+','2015-07-04',1011,1100),
+    -> (12,'mahadev',45,'m','O+','2017-09-10',1012,1200),
+    -> (13,'sakman',21,'m','O-','2003-11-21',1013,1300),
+    -> (14,'mangu',25,'f','A+','2003-11-27',1014,1400),
+    -> (15,'shital',30,'f','A-','2010-04-10',1015,1500),
+    -> (16,'hari',38,'m','B+','2023-07-24',1016,1600),
+    -> (17,'hanmant',55,'m','B-','2020-10-12',1017,1700),
+    -> (18,'sudha',33,'f','A+','2011-01-02',1018,1800),
+    -> (19,'anu',41,'m','A-','2007-08-16',1019,1900),
+    -> (20,'komal',24,'f','AB+','2014-01-28',1020,2000);
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from blood_donor;
++-------+---------+--------+--------+----------------+-------------+-----------+---------+
+| bd_id | bd_name | bd_age | bd_sex | bd_blood_group | bd_reg_date | record_id | city_id |
++-------+---------+--------+--------+----------------+-------------+-----------+---------+
+|    11 | swati   | 35     | f      | O+             | 2015-07-04  |      1011 |    1100 |
+|    12 | mahadev | 45     | m      | O+             | 2017-09-10  |      1012 |    1200 |
+|    13 | sakman  | 21     | m      | O-             | 2003-11-21  |      1013 |    1300 |
+|    14 | mangu   | 25     | f      | A+             | 2003-11-27  |      1014 |    1400 |
+|    15 | shital  | 30     | f      | A-             | 2010-04-10  |      1015 |    1500 |
+|    16 | hari    | 38     | m      | B+             | 2023-07-24  |      1016 |    1600 |
+|    17 | hanmant | 55     | m      | B-             | 2020-10-12  |      1017 |    1700 |
+|    18 | sudha   | 33     | f      | A+             | 2011-01-02  |      1018 |    1800 |
+|    19 | anu     | 41     | m      | A-             | 2007-08-16  |      1019 |    1900 |
+|    20 | komal   | 24     | f      | AB+            | 2014-01-28  |      1020 |    2000 |
++-------+---------+--------+--------+----------------+-------------+-----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create table disease_finder(dfind_id int,dfind_name varchar(10),dfind_phone bigint);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into disease_finder values(01,'sukhman',90785643);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(02,'ravi',08263627);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(03,'darshna',026562735);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(04,'amit',627583622);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(05,'priya',082351436);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(06,'atul',182752711);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(07,'anjali',23156311);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(08,'tanishka',333212321);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into disease_finder values(09,'tanuj',098652517);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into disease_finder values(10,'payal',44882133);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from disease_finder;
++----------+------------+-------------+
+| dfind_id | dfind_name | dfind_phone |
++----------+------------+-------------+
+|        1 | sukhman    |    90785643 |
+|        2 | ravi       |     8263627 |
+|        3 | darshna    |    26562735 |
+|        4 | amit       |   627583622 |
+|        5 | priya      |    82351436 |
+|        6 | atul       |   182752711 |
+|        7 | anjali     |    23156311 |
+|        8 | tanishka   |   333212321 |
+|        9 | tanuj      |    98652517 |
+|       10 | payal      |    44882133 |
++----------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> create table blood_spicemen(spicemen_number int not null,b_group varchar(10),dfind_id int not null,m_id int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into blood_spicemen values(1001,'B+',1,101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1002,'A+',2,102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1003,'A-',3,103);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into blood_spicemen values(1004,'O+',4,104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1005,'O-',5,105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1006,'B-',6,106);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1007,'B+',7,107);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into blood_spicemen values(1008,'A+',8,108);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1009,'A-',9,109);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into blood_spicemen values(1010,'O-',10,110);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> alter table blood_spicemen add status int;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from blood_spicemen;
++-----------------+---------+----------+------+--------+
+| spicemen_number | b_group | dfind_id | m_id | status |
++-----------------+---------+----------+------+--------+
+|            1001 | B+      |        1 |  101 |   NULL |
+|            1002 | A+      |        2 |  102 |   NULL |
+|            1003 | A-      |        3 |  103 |   NULL |
+|            1004 | O+      |        4 |  104 |   NULL |
+|            1005 | O-      |        5 |  105 |   NULL |
+|            1006 | B-      |        6 |  106 |   NULL |
+|            1007 | B+      |        7 |  107 |   NULL |
+|            1008 | A+      |        8 |  108 |   NULL |
+|            1009 | A-      |        9 |  109 |   NULL |
+|            1010 | O-      |       10 |  110 |   NULL |
++-----------------+---------+----------+------+--------+
+10 rows in set (0.00 sec)
+
+mysql> update table blood_spicemen set status=1 where dfind_id=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table blood_spicemen set status=1 where dfind_id=1' at line 1
+mysql> update blood_spicemen set status=1 where dfind_id=1;
+Query OK, 1 row affected (0.94 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=1 where dfind_id=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=0 where dfind_id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=0 where dfind_id=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=0 where dfind_id=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=1 where dfind_id=6;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=1 where dfind_id=7;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=0 where dfind_id=8;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=1 where dfind_id=9;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update blood_spicemen set status=0 where dfind_id=10;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from blood_spicemen;
++-----------------+---------+----------+------+--------+
+| spicemen_number | b_group | dfind_id | m_id | status |
++-----------------+---------+----------+------+--------+
+|            1001 | B+      |        1 |  101 |      1 |
+|            1002 | A+      |        2 |  102 |      1 |
+|            1003 | A-      |        3 |  103 |      0 |
+|            1004 | O+      |        4 |  104 |      0 |
+|            1005 | O-      |        5 |  105 |      0 |
+|            1006 | B-      |        6 |  106 |      1 |
+|            1007 | B+      |        7 |  107 |      1 |
+|            1008 | A+      |        8 |  108 |      0 |
+|            1009 | A-      |        9 |  109 |      1 |
+|            1010 | O-      |       10 |  110 |      0 |
++-----------------+---------+----------+------+--------+
+10 rows in set (0.00 sec)
+
+mysql> create table hospital_info_1(hosp_id int,hosp_name varchar(20),city_id int,m_id int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into hospital_info_1 values(21,'jupiter',1100,101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(22,'fortes',1200,102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital_info_1 values(23,'poona hospital',1300,103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(24,'sahyadri',1400,104);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(25,'city hospital',1500,105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(26,'kumbhar',1600,106);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(27,'kokilaben',1700,107);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(28,'narendramodi',1800,108);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(29,'lotus',1900,109);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_1 values(30,'sunflower',2000,110);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from hospital_info_1;
++---------+----------------+---------+------+
+| hosp_id | hosp_name      | city_id | m_id |
++---------+----------------+---------+------+
+|      21 | jupiter        |    1100 |  101 |
+|      22 | fortes         |    1200 |  102 |
+|      23 | poona hospital |    1300 |  103 |
+|      24 | sahyadri       |    1400 |  104 |
+|      25 | city hospital  |    1500 |  105 |
+|      26 | kumbhar        |    1600 |  106 |
+|      27 | kokilaben      |    1700 |  107 |
+|      28 | narendramodi   |    1800 |  108 |
+|      29 | lotus          |    1900 |  109 |
+|      30 | sunflower      |    2000 |  110 |
++---------+----------------+---------+------+
+10 rows in set (0.00 sec)
+
+mysql> create table hospital_info_2(hosp_id int,hosp_name varchar(20),hosp_needed_bgroup varchar(20),hosp_needed_quntity int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into hospital_info_2 values(21,'dy patil','A+',10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital_info_2 values(22,'jj','b+',20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital_info_2 values(23,'tata','O+',0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_2 values(24,'tata','O+',10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_2 values(25,'jj','A+',30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_2 values(26,'dy patil','A-',10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital_info_2 values(27,'jupiter','O-',40);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital_info_2 values(28,'jupiter','A+',20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into hospital_info_2 values(29,'jj','A-',40);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into hospital_info_2 values(30,'tata','AB+',50);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from hospital_info_2;
++---------+-----------+--------------------+---------------------+
+| hosp_id | hosp_name | hosp_needed_bgroup | hosp_needed_quntity |
++---------+-----------+--------------------+---------------------+
+|      21 | dy patil  | A+                 |                  10 |
+|      22 | jj        | b+                 |                  20 |
+|      23 | tata      | O+                 |                   0 |
+|      24 | tata      | O+                 |                  10 |
+|      25 | jj        | A+                 |                  30 |
+|      26 | dy patil  | A-                 |                  10 |
+|      27 | jupiter   | O-                 |                  40 |
+|      28 | jupiter   | A+                 |                  20 |
+|      29 | jj        | A-                 |                  40 |
+|      30 | tata      | AB+                |                  50 |
++---------+-----------+--------------------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> create table recipient(reci_id int,reci_name varchar(10),reci_age varchar(10),reci_bgroup varchar(10),reci_bqnty float,record_id int,city_id int,m_id
+ int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> alter table recipient add reci_sex varchar(10);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table recipient add reci_reg_date date;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update recipient set reci_sex='f' where hosp_id=21;
+ERROR 1054 (42S22): Unknown column 'hosp_id' in 'where clause'
+mysql> select * from recipient;
+Empty set (0.00 sec)
+
+mysql> insert into recipient values(10001,'sanjay',21,'A+',1.5,1011,1100,101,'m',2021-01-10);
+ERROR 1292 (22007): Incorrect date value: '2010' for column 'reci_reg_date' at row 1
+mysql> insert into recipient values(10001,'sanjay',21,'A+',1.5,1011,1100,101,'m','2021-01-10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10002,'sanjana',22,'B+',2.5,1012,1200,102,'f','2022-10-11');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10003,'sangu',23,'AB+',3.5,1013,1300,103,'f','2010-01-21');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10004,'sanket',25,'O+',3.0,1014,1400,104,'m','2012-07-27');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10005,'radha',30,'O-',1,1015,1500,105,'f','2018-05-20');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10006,'rashika',19,'A+',1.4,1016,1600,106,'f','2020-08-11');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into recipient values(10007,'pintu',30,'AB+',1.8,1017,1700,107,'m','2010-03-18');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into recipient values(10008,'hanmant',38,'B+',0.6,1018,1800,108,'m','2007-12-30');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10009,'ratna',29,'O-',1.9,1019,1900,109,'f','2018-11-10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into recipient values(10010,'anuradha',33,'A+',3.0,1020,2000,110,'f','2011-11-11');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from recipient;
++---------+-----------+----------+-------------+------------+-----------+---------+------+----------+---------------+
+| reci_id | reci_name | reci_age | reci_bgroup | reci_bqnty | record_id | city_id | m_id | reci_sex | reci_reg_date |
++---------+-----------+----------+-------------+------------+-----------+---------+------+----------+---------------+
+|   10001 | sanjay    | 21       | A+          |        1.5 |      1011 |    1100 |  101 | m        | 2021-01-10    |
+|   10002 | sanjana   | 22       | B+          |        2.5 |      1012 |    1200 |  102 | f        | 2022-10-11    |
+|   10003 | sangu     | 23       | AB+         |        3.5 |      1013 |    1300 |  103 | f        | 2010-01-21    |
+|   10004 | sanket    | 25       | O+          |          3 |      1014 |    1400 |  104 | m        | 2012-07-27    |
+|   10005 | radha     | 30       | O-          |          1 |      1015 |    1500 |  105 | f        | 2018-05-20    |
+|   10006 | rashika   | 19       | A+          |        1.4 |      1016 |    1600 |  106 | f        | 2020-08-11    |
+|   10007 | pintu     | 30       | AB+         |        1.8 |      1017 |    1700 |  107 | m        | 2010-03-18    |
+|   10008 | hanmant   | 38       | B+          |        0.6 |      1018 |    1800 |  108 | m        | 2007-12-30    |
+|   10009 | ratna     | 29       | O-          |        1.9 |      1019 |    1900 |  109 | f        | 2018-11-10    |
+|   10010 | anuradha  | 33       | A+          |          3 |      1020 |    2000 |  110 | f        | 2011-11-11    |
++---------+-----------+----------+-------------+------------+-----------+---------+------+----------+---------------+
+10 rows in set (0.00 sec)
